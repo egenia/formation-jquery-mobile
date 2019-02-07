@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <script src="libs/jquery.mobile-1.4.5.js"></script>
+        <meta charset="utf-8" />
+        <link href="libs/jquery.mobile-1.4.5.css" rel="stylesheet" />
+        <script type="text/javascript" src="cordova.js"></script>
+
+        <link href="libs/custom.css" rel="stylesheet" />
+        <script type="text/javascript">
+            $( document ).ready(function() {
+                $.ajax({
+                    url: "http://iphdata.lequipe.fr/iPhoneDatas/EFR/STD/ALL/V2/home.json",
+                    context: document.body
+                    }).done(function(data) {
+                        $("#liste").empty();
+                        for (var i=0; i<data.articles.length;i++){
+                            $("#liste").append("<li>"+data.articles[i].titre+"</li>");
+                        }
+                        $('#liste').listview('refresh');
+                        console.log(data);
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div data-role="page" id="page1" data-theme="c">
+            <div data-role="header" data-position="fixed">
+                <a href="#page1">Accueil</a>
+                <h1>L'équipe</h1>
+                <a href="#page2">Infos</a>
+            </div>
+            <div data-role="content">
+                <input type="search" />
+                <select data-role="slider">
+                    <option value="on">On</option>
+                    <option value="off">Off</option>
+                </select>
+                <div data-role="collapsible">
+                    <h3>Voir les détails</h3>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                                <a href="#page2" data-transition="flip" data-role="button" data-icon="home" data-iconpos="top">Aller à la page 2</a>
+                        </div>
+                        <div class="ui-block-b">
+                                <a href="#page2" data-transition="flip" data-role="button">Aller à la page 2</a>
+                        </div>
+                    </div>
+                </div>
+                <span>Page 1</span>
+                
+                
+                
+            </div>
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="" data-icon="home">Accueil</a></li>
+                        <li><a href="" data-icon="star">Infos</a></li>
+                        <li><a href="" data-icon="star">Infos</a></li>
+                        <li><a href="" data-icon="star">Infos</a></li>
+                        <li><a href="" data-icon="star">Infos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div data-role="page" id="page2">
+            <div data-role="header" data-position="fixed">
+                <h1>L'équipe</h1>
+            </div>
+            <div data-role="content">
+                <ul id="liste" data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="false">
+                    <li>
+                        <a href="#">Ligne 1</a>
+                        <span class="ui-li-count">12</span>
+                    </li>
+                    <li><a href="#">Ligne 2</a></li>
+                </ul>
+                <a href="#page1" data-transition="flip" data-direction="reverse">Aller à la page 1</a>
+            </div>
+            <div data-role="footer" data-position="fixed">
+
+            </div>
+        </div>
+    </body>
+</html>
